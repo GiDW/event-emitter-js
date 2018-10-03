@@ -1,2 +1,1 @@
-# event-emitter-js
-JavaScript EventEmitter
+# EventEmitter

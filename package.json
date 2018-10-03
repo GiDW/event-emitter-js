@@ -1,0 +1,26 @@
+{
+  "name": "@gidw/event-emitter-js",
+  "version": "0.0.1",
+  "description": "JavaScript EventEmitter",
+  "author": "Gilles De Waele",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "javascript",
+    "node",
+    "browser",
+    "events",
+    "event",
+    "eventemitter"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "12.0.1"
+  },
+  "repository": "github:GiDW/event-emitter-js.git",
+  "bugs": {
+    "url": "https://github.com/GiDW/event-emitter-js/issues",
+    "email": "de.waele.gilles@gmail.com"
+  },
+  "scripts": {}
+}

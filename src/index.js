@@ -19,57 +19,51 @@
   // TODO Multiple same listeners, on remove, delete last added first
   function EventEmitter () {
     /**
-         * @type {Object.<string, function[]>}
-         */
+      * @type {Object.<string, function[]>}
+      */
     this._events = {}
   }
 
   EventEmitter.prototype.emit = function (eventName) {
     var listeners, i, length, args
-
-    if (typeof eventName === 'string' && eventName &&
-            this._events[eventName]) {
+    if (typeof eventName === 'string' &&
+        eventName &&
+        this._events[eventName]) {
       args = _getArgs(arguments, 1)
-
       listeners = this._events[eventName]
       length = listeners.length
       for (i = 0; i < length; i++) {
         listeners[i].apply(this, args)
       }
     }
-
     return this
   }
 
   EventEmitter.prototype.addListener = function (eventName, listener) {
-    if (typeof eventName === 'string' && eventName &&
-            typeof listener === 'function') {
+    if (typeof eventName === 'string' &&
+        eventName &&
+        typeof listener === 'function') {
       if (!this._events[eventName]) this._events[eventName] = []
-
       this._events[eventName].push(listener)
     }
-
     return this
   }
 
   EventEmitter.prototype.removeListener = function (eventName, listener) {
     var listeners, i, length
-
-    if (typeof eventName === 'string' && eventName &&
-            typeof listener === 'function' &&
-            this._events[eventName]) {
+    if (typeof eventName === 'string' &&
+        eventName &&
+        typeof listener === 'function' &&
+        this._events[eventName]) {
       listeners = this._events[eventName]
-
       length = listeners.length
       for (i = 0; i < length; i++) {
         if (listeners[i] === listener) {
           listeners.splice(i, 1)
-
           break
         }
       }
     }
-
     return this
   }
 
@@ -80,22 +74,19 @@
 
   EventEmitter.prototype.once = function (eventName, listener) {
     var onceWrapped, state
-
-    if (typeof eventName === 'string' && eventName &&
-            typeof listener === 'function') {
+    if (typeof eventName === 'string' &&
+        eventName &&
+        typeof listener === 'function') {
+      // Shared object to hold actual listener reference for removal
       state = {
         eventName: eventName,
         listener: listener,
         wrappedListener: null
       }
-
       onceWrapped = _once.bind(this, state)
-
       state.wrappedListener = onceWrapped
-
       this.addListener(eventName, onceWrapped)
     }
-
     return this
   }
 
@@ -106,7 +97,6 @@
 
   function _once (state) {
     this.removeListener(state.eventName, state.wrappedListener)
-
     state.listener.apply(this, _getArgs(arguments, 1))
   }
 
@@ -117,14 +107,9 @@
      */
   function _getArgs (args, offset) {
     var result, i, length
-
     result = []
-
     length = args.length
-    for (i = offset; i < length; i++) {
-      result.push(args[i])
-    }
-
+    for (i = offset; i < length; i++) result.push(args[i])
     return result
   }
 }))

@@ -19,8 +19,8 @@
   // TODO Multiple same listeners, on remove, delete last added first
   function EventEmitter () {
     /**
-      * @type {Object.<string, function[]>}
-      */
+     * @type {Object.<string, function[]>}
+     */
     this._events = {}
   }
 
@@ -101,10 +101,10 @@
   }
 
   /**
-     * @param {IArguments} args
-     * @param {number} offset
-     * @returns {Array}
-     */
+   * @param {IArguments} args
+   * @param {number} offset
+   * @returns {Array}
+   */
   function _getArgs (args, offset) {
     var result, i, length
     result = []

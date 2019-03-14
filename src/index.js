@@ -12,7 +12,7 @@
     module.exports = factory()
   } else {
     // Browser globals (root is window)
-    root.EventEmitter = factory()
+    root['EventEmitter'] = factory()
   }
 }(typeof self !== 'undefined' ? self : this, function () {
   // TODO once

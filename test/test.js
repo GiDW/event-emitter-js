@@ -2,7 +2,9 @@
 
 const chai = require('chai')
 const expect = chai.expect
-const EventEmitter = require('../dist/index.js')
+const EventEmitter = require('../dist/index.min.js')
+
+console.log('TEST', EventEmitter)
 
 describe('on', function () {
   it('Should fire once', function () {

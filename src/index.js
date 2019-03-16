@@ -19,12 +19,12 @@
   // TODO Multiple same listeners, on remove, delete last added first
   function EventEmitter () {
     /**
-     * @type {Object.<string, function[]>}
+     * @type {Object}
      */
     this._events = {}
   }
 
-  EventEmitter.prototype.emit = function (eventName) {
+  EventEmitter.prototype['emit'] = function (eventName) {
     var listeners, i, length, args
     if (typeof eventName === 'string' &&
         eventName &&
@@ -39,7 +39,7 @@
     return this
   }
 
-  EventEmitter.prototype.addListener = function (eventName, listener) {
+  EventEmitter.prototype['addListener'] = function (eventName, listener) {
     if (typeof eventName === 'string' &&
         eventName &&
         typeof listener === 'function') {
@@ -49,7 +49,7 @@
     return this
   }
 
-  EventEmitter.prototype.removeListener = function (eventName, listener) {
+  EventEmitter.prototype['removeListener'] = function (eventName, listener) {
     var listeners, i, length
     if (typeof eventName === 'string' &&
         eventName &&
@@ -67,12 +67,12 @@
     return this
   }
 
-  EventEmitter.prototype.removeAllListeners = function () {
+  EventEmitter.prototype['removeAllListeners'] = function () {
     this._events = {}
     return this
   }
 
-  EventEmitter.prototype.once = function (eventName, listener) {
+  EventEmitter.prototype['once'] = function (eventName, listener) {
     var onceWrapped, state
     if (typeof eventName === 'string' &&
         eventName &&
@@ -90,8 +90,8 @@
     return this
   }
 
-  EventEmitter.prototype.on = EventEmitter.prototype.addListener
-  EventEmitter.prototype.off = EventEmitter.prototype.removeListener
+  EventEmitter.prototype['on'] = EventEmitter.prototype.addListener
+  EventEmitter.prototype['off'] = EventEmitter.prototype.removeListener
 
   return EventEmitter
 
@@ -101,7 +101,7 @@
   }
 
   /**
-   * @param {IArguments} args
+   * @param {Arguments} args
    * @param {number} offset
    * @returns {Array}
    */

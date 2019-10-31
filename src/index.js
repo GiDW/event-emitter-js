@@ -12,10 +12,10 @@
     module.exports = factory()
   } else {
     // Browser globals (root is window)
+    // eslint-disable-next-line dot-notation
     root['EventEmitter'] = factory()
   }
 }(typeof self !== 'undefined' ? self : this, function () {
-  // TODO once
   // TODO Multiple same listeners, on remove, delete last added first
   function EventEmitter () {
     /**
@@ -24,6 +24,7 @@
     this._events = {}
   }
 
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['emit'] = function (eventName) {
     var listeners, i, length, args
     if (typeof eventName === 'string' &&
@@ -39,6 +40,7 @@
     return this
   }
 
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['addListener'] = function (eventName, listener) {
     if (typeof eventName === 'string' &&
         eventName &&
@@ -49,29 +51,30 @@
     return this
   }
 
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['removeListener'] = function (eventName, listener) {
-    var listeners, i, length
+    var listeners, idx
     if (typeof eventName === 'string' &&
         eventName &&
         typeof listener === 'function' &&
         this._events[eventName]) {
       listeners = this._events[eventName]
-      length = listeners.length
-      for (i = 0; i < length; i++) {
-        if (listeners[i] === listener) {
-          listeners.splice(i, 1)
-          break
-        }
+      idx = listeners.indexOf(listener)
+      while (idx > -1) {
+        listeners.splice(idx, 1)
+        idx = listeners.indexOf(listener)
       }
     }
     return this
   }
 
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['removeAllListeners'] = function () {
     this._events = {}
     return this
   }
 
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['once'] = function (eventName, listener) {
     var onceWrapped, state
     if (typeof eventName === 'string' &&
@@ -90,7 +93,9 @@
     return this
   }
 
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['on'] = EventEmitter.prototype.addListener
+  // eslint-disable-next-line dot-notation
   EventEmitter.prototype['off'] = EventEmitter.prototype.removeListener
 
   return EventEmitter

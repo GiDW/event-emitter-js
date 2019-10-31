@@ -17,9 +17,10 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "4.2.0",
-    "google-closure-compiler": "20190301.0.0",
-    "mocha": "6.0.2",
-    "standard": "12.0.1"
+    "google-closure-compiler": "20191027.0.0",
+    "mocha": "6.2.2",
+    "standard": "14.3.1",
+    "typescript": "3.6.4"
   },
   "repository": "github:GiDW/event-emitter-js.git",
   "bugs": {
@@ -27,7 +28,8 @@
     "email": "de.waele.gilles@gmail.com"
   },
   "scripts": {
-    "build": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs src/umd.extern.js --js_output_file dist/index.min.js src/index.js",
+    "build-typescript": "tsc",
+    "build": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
     "clean": "rm -rf dist/*",
     "test": "mocha"
   }

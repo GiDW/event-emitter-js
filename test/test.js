@@ -1,10 +1,11 @@
+/* eslint-env mocha */
+
 'use strict'
 
 const chai = require('chai')
 const expect = chai.expect
-const EventEmitter = require('../dist/index.min.js')
 
-console.log('TEST', EventEmitter)
+const EventEmitter = require('../dist/event_emitter').default
 
 describe('on', function () {
   it('Should fire once', function () {
@@ -57,6 +58,17 @@ describe('on', function () {
     function listener () {
       count++
     }
+  })
+  it('Should pass event arguments', function () {
+    const EVT = 'someEvent'
+    const emitter = new EventEmitter()
+    let result1, result2
+    emitter.on(EVT, function (arg1, arg2) {
+      result1 = arg1
+      result2 = arg2
+    })
+    emitter.emit(EVT, 12, 'lol')
+    expect(result1).to.equal(12) && expect(result2).to.equal('lol')
   })
 })
 

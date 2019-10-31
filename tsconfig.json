@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig-base",
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "module": "UMD"
+  },
+  "files": [
+    "./src/event_emitter.ts"
+  ]
+}

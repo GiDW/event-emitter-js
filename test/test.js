@@ -71,6 +71,16 @@ describe('EventEmitter', function () {
       emitter.emit(EVT, 12, 'lol')
       expect(result1).to.equal(12) && expect(result2).to.equal('lol')
     })
+    it('should have the emitter "this" context', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let listenerThis
+      emitter.on(EVT, function () {
+        listenerThis = this
+      })
+      emitter.emit(EVT)
+      expect(listenerThis).to.equal(emitter)
+    })
   })
 
   describe('#once', function () {

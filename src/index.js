@@ -16,7 +16,6 @@
     root['EventEmitter'] = factory()
   }
 }(typeof self !== 'undefined' ? self : this, function () {
-  // TODO Multiple same listeners, on remove, delete last added first
   function EventEmitter () {
     /**
      * @type {Object}
@@ -59,7 +58,7 @@
         typeof listener === 'function' &&
         this._events[eventName]) {
       listeners = this._events[eventName]
-      idx = listeners.indexOf(listener)
+      idx = listeners.lastIndexOf(listener)
       while (idx > -1) {
         listeners.splice(idx, 1)
         idx = listeners.indexOf(listener)

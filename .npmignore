@@ -278,6 +278,8 @@ test
 .eslint-base.json
 .eslintrc.json
 .nvmrc
+tsconfig-base.json
+tsconfig.json
 
 *.zip
 *.tgz

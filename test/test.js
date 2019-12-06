@@ -85,5 +85,29 @@ describe('EventEmitter', function () {
       emitter.emit(EVT)
       expect(count).to.equal(1)
     })
+    it('should fire once for each "once" listener', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let count1 = 0
+      let count2 = 0
+      let count3 = 0
+      emitter.emit(EVT)
+      emitter.once(EVT, function () {
+        count1++
+      })
+      emitter.emit(EVT)
+      emitter.on(EVT, function () {
+        count2++
+      })
+      emitter.emit(EVT)
+      emitter.once(EVT, function () {
+        count3++
+      })
+      emitter.emit(EVT)
+      emitter.emit(EVT)
+      expect(count1).to.equal(1) &&
+      expect(count2).to.equal(3) &&
+      expect(count3).to.equal(1)
+    })
   })
 })

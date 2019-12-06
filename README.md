@@ -1,1 +1,3 @@
 # EventEmitter
+
+Simplified EventEmitter

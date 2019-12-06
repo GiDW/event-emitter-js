@@ -31,6 +31,6 @@
     "build-typescript": "tsc",
     "build": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
     "clean": "rm -rf dist/*",
-    "test": "mocha"
+    "test": "mocha test/test.js"
   }
 }

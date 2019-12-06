@@ -59,10 +59,7 @@
         this._events[eventName]) {
       listeners = this._events[eventName]
       idx = listeners.lastIndexOf(listener)
-      while (idx > -1) {
-        listeners.splice(idx, 1)
-        idx = listeners.indexOf(listener)
-      }
+      if (idx > -1) listeners.splice(idx, 1)
     }
     return this
   }

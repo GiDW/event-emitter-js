@@ -7,81 +7,83 @@ const expect = chai.expect
 
 const EventEmitter = require('../dist/event_emitter').default
 
-describe('on', function () {
-  it('Should fire once', function () {
-    const EVT = 'someEvent'
-    const emitter = new EventEmitter()
-    let count = 0
-    emitter.on(EVT, function () {
-      count++
+describe('EventEmitter', function () {
+  describe('#on', function () {
+    it('should fire once', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let count = 0
+      emitter.on(EVT, function () {
+        count++
+      })
+      emitter.emit(EVT)
+      expect(count).to.equal(1)
     })
-    emitter.emit(EVT)
-    expect(count).to.equal(1)
-  })
-  it('Should fire twice', function () {
-    const EVT = 'someEvent'
-    const emitter = new EventEmitter()
-    let count = 0
-    emitter.on(EVT, function () {
-      count++
+    it('should fire twice', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let count = 0
+      emitter.on(EVT, function () {
+        count++
+      })
+      emitter.on(EVT, function () {
+        count++
+      })
+      emitter.emit(EVT)
+      expect(count).to.equal(2)
     })
-    emitter.on(EVT, function () {
-      count++
+    it('should fire four times', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let count = 0
+      emitter.on(EVT, function () {
+        count++
+      })
+      emitter.on(EVT, function () {
+        count++
+      })
+      emitter.emit(EVT)
+      emitter.emit(EVT)
+      expect(count).to.equal(4)
     })
-    emitter.emit(EVT)
-    expect(count).to.equal(2)
-  })
-  it('Should fire four times', function () {
-    const EVT = 'someEvent'
-    const emitter = new EventEmitter()
-    let count = 0
-    emitter.on(EVT, function () {
-      count++
-    })
-    emitter.on(EVT, function () {
-      count++
-    })
-    emitter.emit(EVT)
-    emitter.emit(EVT)
-    expect(count).to.equal(4)
-  })
-  it('Should fire once', function () {
-    const EVT = 'someEvent'
-    const emitter = new EventEmitter()
-    let count = 0
-    emitter.on(EVT, listener)
-    emitter.emit(EVT)
-    emitter.removeListener(EVT, listener)
-    emitter.emit(EVT)
-    expect(count).to.equal(1)
+    it('should fire once', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let count = 0
+      emitter.on(EVT, listener)
+      emitter.emit(EVT)
+      emitter.removeListener(EVT, listener)
+      emitter.emit(EVT)
+      expect(count).to.equal(1)
 
-    function listener () {
-      count++
-    }
-  })
-  it('Should pass event arguments', function () {
-    const EVT = 'someEvent'
-    const emitter = new EventEmitter()
-    let result1, result2
-    emitter.on(EVT, function (arg1, arg2) {
-      result1 = arg1
-      result2 = arg2
+      function listener () {
+        count++
+      }
     })
-    emitter.emit(EVT, 12, 'lol')
-    expect(result1).to.equal(12) && expect(result2).to.equal('lol')
+    it('should pass event arguments', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let result1, result2
+      emitter.on(EVT, function (arg1, arg2) {
+        result1 = arg1
+        result2 = arg2
+      })
+      emitter.emit(EVT, 12, 'lol')
+      expect(result1).to.equal(12) && expect(result2).to.equal('lol')
+    })
   })
-})
 
-describe('once', function () {
-  it('Should fire once', function () {
-    const EVT = 'someEvent'
-    const emitter = new EventEmitter()
-    let count = 0
-    emitter.once(EVT, function () {
-      count++
+  describe('#once', function () {
+    it('should fire once', function () {
+      const EVT = 'someEvent'
+      const emitter = new EventEmitter()
+      let count = 0
+      emitter.once(EVT, function () {
+        count++
+      })
+      emitter.emit(EVT)
+      emitter.emit(EVT)
+      expect(count).to.equal(1)
     })
-    emitter.emit(EVT)
-    emitter.emit(EVT)
-    expect(count).to.equal(1)
   })
 })

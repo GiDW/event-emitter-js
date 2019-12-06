@@ -87,20 +87,22 @@
       }
       onceWrapped = _once.bind(this, state)
       state.wrappedListener = onceWrapped
-      this.addListener(eventName, onceWrapped)
+      // eslint-disable-next-line dot-notation
+      this['addListener'](eventName, onceWrapped)
     }
     return this
   }
 
   // eslint-disable-next-line dot-notation
-  EventEmitter.prototype['on'] = EventEmitter.prototype.addListener
+  EventEmitter.prototype['on'] = EventEmitter.prototype['addListener']
   // eslint-disable-next-line dot-notation
-  EventEmitter.prototype['off'] = EventEmitter.prototype.removeListener
+  EventEmitter.prototype['off'] = EventEmitter.prototype['removeListener']
 
   return EventEmitter
 
   function _once (state) {
-    this.removeListener(state.eventName, state.wrappedListener)
+    // eslint-disable-next-line dot-notation
+    this['removeListener'](state.eventName, state.wrappedListener)
     state.listener.apply(this, _getArgs(arguments, 1))
   }
 

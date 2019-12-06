@@ -273,6 +273,7 @@ test
 
 .idea
 .vscode
+.github
 
 .editorconfig
 .eslint-base.json
@@ -281,5 +282,12 @@ test
 tsconfig-base.json
 tsconfig.json
 
+*.yml
 *.zip
 *.tgz
+
+# Prevent publishing typescript artifacts
+
+dist/event_emitter.js
+dist/event_emitter.d.ts
+src/event_emitter.ts

@@ -36,6 +36,22 @@
             }
             return this;
         };
+        EventEmitter.prototype.removeListener = function (eventName, listener) {
+            if (typeof eventName === 'string' &&
+                eventName &&
+                typeof listener === 'function' &&
+                this._events[eventName]) {
+                var listeners = this._events[eventName];
+                var idx = listeners.lastIndexOf(listener);
+                if (idx > -1)
+                    listeners.splice(idx, 1);
+            }
+            return this;
+        };
+        EventEmitter.prototype.removeAllListeners = function () {
+            this._events = {};
+            return this;
+        };
         EventEmitter.prototype.once = function (eventName, listener) {
             if (typeof eventName === 'string' &&
                 eventName &&
@@ -49,24 +65,6 @@
                 state.wrappedListener = onceWrapped;
                 this.addListener(eventName, onceWrapped);
             }
-            return this;
-        };
-        EventEmitter.prototype.removeListener = function (eventName, listener) {
-            if (typeof eventName === 'string' &&
-                eventName &&
-                typeof listener === 'function' &&
-                this._events[eventName]) {
-                var listeners = this._events[eventName];
-                var idx = listeners.indexOf(listener);
-                while (idx > -1) {
-                    listeners.splice(idx, 1);
-                    idx = listeners.indexOf(listener);
-                }
-            }
-            return this;
-        };
-        EventEmitter.prototype.removeAllListeners = function () {
-            this._events = {};
             return this;
         };
         EventEmitter.prototype._once = function (state) {

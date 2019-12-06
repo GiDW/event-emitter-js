@@ -36,6 +36,23 @@ class EventEmitter {
     return this
   }
 
+  public removeListener (eventName: string, listener: (...args: any) => void) {
+    if (typeof eventName === 'string' &&
+        eventName &&
+        typeof listener === 'function' &&
+        this._events[eventName]) {
+      const listeners = this._events[eventName]
+      let idx = listeners.lastIndexOf(listener)
+      if (idx > -1) listeners.splice(idx, 1)
+    }
+    return this
+  }
+
+  public removeAllListeners () {
+    this._events = {}
+    return this
+  }
+
   public once (eventName: string, listener: (...args: any) => void) {
     if (typeof eventName === 'string' &&
         eventName &&
@@ -49,26 +66,6 @@ class EventEmitter {
       state.wrappedListener = onceWrapped
       this.addListener(eventName, onceWrapped)
     }
-    return this
-  }
-
-  public removeListener (eventName: string, listener: (...args: any) => void) {
-    if (typeof eventName === 'string' &&
-        eventName &&
-        typeof listener === 'function' &&
-        this._events[eventName]) {
-      const listeners = this._events[eventName]
-      let idx = listeners.indexOf(listener)
-      while (idx > -1) {
-        listeners.splice(idx, 1)
-        idx = listeners.indexOf(listener)
-      }
-    }
-    return this
-  }
-
-  public removeAllListeners () {
-    this._events = {}
     return this
   }
 

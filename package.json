@@ -4,7 +4,7 @@
   "description": "JavaScript EventEmitter",
   "author": "Gilles De Waele",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.min.js",
   "types": "src/index.d.ts",
   "keywords": [
     "javascript",

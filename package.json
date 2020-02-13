@@ -16,7 +16,6 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "chai": "4.2.0",
     "google-closure-compiler": "20200204.0.0",
     "mocha": "7.0.1",
     "standard": "14.3.1",

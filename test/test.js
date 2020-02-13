@@ -2,10 +2,9 @@
 
 'use strict'
 
-const chai = require('chai')
-const expect = chai.expect
+var assert = require('assert')
 
-const EventEmitter = require('../dist/event_emitter').default
+var EventEmitter = require('../dist/event_emitter').default
 
 describe('EventEmitter', function () {
   describe('#on', function () {
@@ -17,7 +16,7 @@ describe('EventEmitter', function () {
         count++
       })
       emitter.emit(EVT)
-      expect(count).to.equal(1)
+      assert.strictEqual(count, 1)
     })
     it('should fire twice', function () {
       const EVT = 'someEvent'
@@ -30,7 +29,7 @@ describe('EventEmitter', function () {
         count++
       })
       emitter.emit(EVT)
-      expect(count).to.equal(2)
+      assert.strictEqual(count, 2)
     })
     it('should fire four times', function () {
       const EVT = 'someEvent'
@@ -44,7 +43,7 @@ describe('EventEmitter', function () {
       })
       emitter.emit(EVT)
       emitter.emit(EVT)
-      expect(count).to.equal(4)
+      assert.strictEqual(count, 4)
     })
     it('should fire once', function () {
       const EVT = 'someEvent'
@@ -54,7 +53,7 @@ describe('EventEmitter', function () {
       emitter.emit(EVT)
       emitter.removeListener(EVT, listener)
       emitter.emit(EVT)
-      expect(count).to.equal(1)
+      assert.strictEqual(count, 1)
 
       function listener () {
         count++
@@ -69,7 +68,8 @@ describe('EventEmitter', function () {
         result2 = arg2
       })
       emitter.emit(EVT, 12, 'lol')
-      expect(result1).to.equal(12) && expect(result2).to.equal('lol')
+      assert.strictEqual(result1, 12)
+      assert.strictEqual(result2, 'lol')
     })
     it('should have the emitter "this" context', function () {
       const EVT = 'someEvent'
@@ -79,7 +79,7 @@ describe('EventEmitter', function () {
         listenerThis = this
       })
       emitter.emit(EVT)
-      expect(listenerThis).to.equal(emitter)
+      assert.strictEqual(listenerThis, emitter)
     })
   })
 
@@ -93,7 +93,7 @@ describe('EventEmitter', function () {
       })
       emitter.emit(EVT)
       emitter.emit(EVT)
-      expect(count).to.equal(1)
+      assert.strictEqual(count, 1)
     })
     it('should fire once for each "once" listener', function () {
       const EVT = 'someEvent'
@@ -115,9 +115,9 @@ describe('EventEmitter', function () {
       })
       emitter.emit(EVT)
       emitter.emit(EVT)
-      expect(count1).to.equal(1) &&
-      expect(count2).to.equal(3) &&
-      expect(count3).to.equal(1)
+      assert.strictEqual(count1, 1)
+      assert.strictEqual(count2, 3)
+      assert.strictEqual(count3, 1)
     })
   })
 })

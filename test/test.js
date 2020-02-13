@@ -4,8 +4,14 @@
 
 var assert = require('assert')
 
-testEventEmitter(require('../dist/event_emitter').default, 'EventEmitter')
-testEventEmitter(require('../dist/index.min'), 'EventEmitter (minified)')
+testEventEmitter(
+  require('../dist/event_emitter').default,
+  'EventEmitter (TypeScript build)'
+)
+testEventEmitter(
+  require('../dist/index.min'),
+  'EventEmitter (Closure build)'
+)
 
 function testEventEmitter (EventEmitter, testName) {
   describe(testName, function () {

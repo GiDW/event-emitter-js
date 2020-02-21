@@ -19,7 +19,8 @@
     "google-closure-compiler": "20200204.0.0",
     "mocha": "7.0.1",
     "standard": "14.3.1",
-    "typescript": "3.8.2"
+    "typescript": "3.8.2",
+    "uglify-js": "3.8.0"
   },
   "repository": "github:GiDW/event-emitter-js.git",
   "bugs": {
@@ -29,6 +30,7 @@
   "scripts": {
     "lint": "standard src/index.js",
     "build-typescript": "tsc",
+    "build-uglify": "uglifyjs src/index.js --compress --mangle -o dist/index.uglify.js",
     "build": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
     "clean": "rm -rf dist/*",
     "test": "mocha test/test.js"

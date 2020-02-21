@@ -20,7 +20,8 @@
     /**
      * @type {Object}
      */
-    this._events = {}
+    // eslint-disable-next-line dot-notation
+    this['_events'] = {}
   }
 
   // eslint-disable-next-line dot-notation
@@ -28,9 +29,11 @@
     var listeners, i, length, args
     if (typeof eventName === 'string' &&
         eventName &&
-        this._events[eventName]) {
+        // eslint-disable-next-line dot-notation
+        this['_events'][eventName]) {
       args = _getArgs(arguments, 1)
-      listeners = this._events[eventName]
+      // eslint-disable-next-line dot-notation
+      listeners = this['_events'][eventName]
       length = listeners.length
       for (i = 0; i < length; i++) {
         listeners[i].apply(this, args)
@@ -44,8 +47,10 @@
     if (typeof eventName === 'string' &&
         eventName &&
         typeof listener === 'function') {
-      if (!this._events[eventName]) this._events[eventName] = []
-      this._events[eventName].push(listener)
+      // eslint-disable-next-line dot-notation
+      if (!this['_events'][eventName]) this['_events'][eventName] = []
+      // eslint-disable-next-line dot-notation
+      this['_events'][eventName].push(listener)
     }
     return this
   }
@@ -56,8 +61,10 @@
     if (typeof eventName === 'string' &&
         eventName &&
         typeof listener === 'function' &&
-        this._events[eventName]) {
-      listeners = this._events[eventName]
+        // eslint-disable-next-line dot-notation
+        this['_events'][eventName]) {
+      // eslint-disable-next-line dot-notation
+      listeners = this['_events'][eventName]
       idx = listeners.lastIndexOf(listener)
       if (idx > -1) listeners.splice(idx, 1)
     }
@@ -66,7 +73,8 @@
 
   // eslint-disable-next-line dot-notation
   EventEmitter.prototype['removeAllListeners'] = function () {
-    this._events = {}
+    // eslint-disable-next-line dot-notation
+    this['_events'] = {}
     return this
   }
 

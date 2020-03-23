@@ -294,8 +294,11 @@ test
 .eslintrc.json
 .eslintrc.js
 .nvmrc
-tsconfig-base.json
 tsconfig.json
+tsconfig-base.json
+tsconfig-rollup.json
+tsconfig-typings.json
+rollup.config.js
 
 *.yml
 *.zip

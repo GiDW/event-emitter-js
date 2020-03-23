@@ -1,12 +1,8 @@
 {
-  "extends": "./tsconfig-base",
+  "extends": "./tsconfig-rollup",
   "compilerOptions": {
-    "target": "es5",
     "outDir": "./dist",
     "declaration": true,
     "declarationDir": "./dist"
-  },
-  "files": [
-    "./src/event_emitter.ts"
-  ]
+  }
 }

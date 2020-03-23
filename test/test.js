@@ -5,8 +5,16 @@
 var assert = require('assert')
 
 testEventEmitter(
-  require('../dist/event_emitter').default,
+  require('events'),
+  'Events (NodeJS) - Reference'
+)
+testEventEmitter(
+  require('../dist/event_emitter'),
   'EventEmitter (TypeScript build)'
+)
+testEventEmitter(
+  require('../dist/event_emitter'),
+  'EventEmitter (TypeScript UMD build)'
 )
 testEventEmitter(
   require('../dist/index.min'),

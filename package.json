@@ -4,8 +4,9 @@
   "description": "JavaScript EventEmitter",
   "author": "Gilles De Waele",
   "license": "MIT",
-  "main": "dist/index.min.js",
-  "types": "src/index.d.ts",
+  "main": "dist/event_emitter.js",
+  "browser": "dist/event_emitter.js",
+  "types": "dist/event_emitter.d.ts",
   "keywords": [
     "javascript",
     "node",
@@ -16,10 +17,15 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "google-closure-compiler": "20200204.0.0",
-    "mocha": "7.0.1",
-    "standard": "14.3.1",
-    "typescript": "3.8.2",
+    "@rollup/plugin-typescript": "4.0.0",
+    "@typescript-eslint/eslint-plugin": "2.24.0",
+    "@typescript-eslint/parser": "2.24.0",
+    "google-closure-compiler": "20200315.0.0",
+    "mocha": "7.1.1",
+    "rollup": "2.1.0",
+    "rollup-plugin-uglify": "6.0.4",
+    "standard": "14.3.3",
+    "typescript": "3.8.3",
     "uglify-js": "3.8.0"
   },
   "repository": "github:GiDW/event-emitter-js.git",
@@ -29,9 +35,9 @@
   },
   "scripts": {
     "lint": "standard src/**/*.{js,ts}",
-    "build-typescript": "tsc",
+    "build-rollup": "rollup --config rollup.config.js",
     "build-uglify": "uglifyjs src/index.js --compress --mangle -o dist/index.uglify.js",
-    "build": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
+    "build-closure": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
     "clean": "rm -rf dist/*",
     "test": "mocha test/test.js"
   },

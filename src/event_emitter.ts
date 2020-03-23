@@ -1,22 +1,21 @@
-interface TEvents {
+interface EventEmitterEvents {
   [key: string]: ((...args: any) => void)[]
 }
 
-interface TEventState {
+interface EventEmitterEventState {
   eventName: string
   listener: (...args: any) => void
   wrappedListener?: (...args: any) => void
 }
 
 class EventEmitter {
-
-  _events: TEvents = {}
+  _events: EventEmitterEvents = {}
 
   public emit (eventName: string) {
     if (typeof eventName === 'string' &&
         eventName &&
         this._events[eventName]) {
-      const args = EventEmitter._getArgs(arguments, 1)
+      const args = getArgs(arguments, 1)
       const listeners = this._events[eventName]
       const length = listeners.length
       for (let i = 0; i < length; i++) {
@@ -42,7 +41,7 @@ class EventEmitter {
         typeof listener === 'function' &&
         this._events[eventName]) {
       const listeners = this._events[eventName]
-      let idx = listeners.lastIndexOf(listener)
+      const idx = listeners.lastIndexOf(listener)
       if (idx > -1) listeners.splice(idx, 1)
     }
     return this
@@ -57,7 +56,7 @@ class EventEmitter {
     if (typeof eventName === 'string' &&
         eventName &&
         typeof listener === 'function') {
-      const state: TEventState = {
+      const state: EventEmitterEventState = {
         eventName: eventName,
         listener: listener,
         wrappedListener: undefined
@@ -69,20 +68,19 @@ class EventEmitter {
     return this
   }
 
-  private _once (state: TEventState) {
+  private _once (state: EventEmitterEventState) {
     if (state.wrappedListener) {
       this.removeListener(state.eventName, state.wrappedListener)
-      state.listener.apply(this, EventEmitter._getArgs(arguments, 1))
+      state.listener.apply(this, getArgs(arguments, 1))
     }
   }
+}
 
-  private static _getArgs (args: IArguments, offset: number): any[] {
-   var result, i, length
-   result = []
-   length = args.length
-   for (i = offset; i < length; i++) result.push(args[i])
-   return result
- }
+function getArgs (args: IArguments, offset: number): any[] {
+  const result = []
+  const length = args.length
+  for (let i = offset; i < length; i++) result.push(args[i])
+  return result
 }
 
 interface EventEmitter {

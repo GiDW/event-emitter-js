@@ -2,9 +2,7 @@
   "extends": "./tsconfig-base",
   "compilerOptions": {
     "target": "es5",
-    "outDir": "./dist",
-    "declaration": true,
-    "declarationDir": "./dist"
+    "rootDir": "./src"
   },
   "files": [
     "./src/event_emitter.ts"

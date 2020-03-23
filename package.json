@@ -28,11 +28,21 @@
     "email": "de.waele.gilles@gmail.com"
   },
   "scripts": {
-    "lint": "standard src/index.js",
+    "lint": "standard src/**/*.{js,ts}",
     "build-typescript": "tsc",
     "build-uglify": "uglifyjs src/index.js --compress --mangle -o dist/index.uglify.js",
     "build": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
     "clean": "rm -rf dist/*",
     "test": "mocha test/test.js"
+  },
+  "standard": {
+    "ignore": [
+      "dist/**/*",
+      "**/*.d.ts"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
   }
 }

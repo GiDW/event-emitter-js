@@ -9,6 +9,10 @@ module.exports = {
   ignorePatterns: [
     'node_modules/',
     'dist/**/*',
+    'esm/**/*',
+    'lib/**/*',
+    'umd/**/*',
+    'legacy-dist/**/*',
     '**/*.d.ts'
   ],
   env: {

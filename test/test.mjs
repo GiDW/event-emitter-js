@@ -2,28 +2,33 @@
 
 'use strict'
 
-var assert = require('assert')
+import assert from 'assert'
+
+import events from 'events'
+import EventEmitterEsm from '../esm/event_emitter.mjs'
+import EventEmitterCjs from '../lib/event_emitter.cjs.js'
+import EventEmitterUmd from '../dist/event_emitter.umd.js'
 
 testEventEmitter(
-  require('events'),
+  events,
   'Events (NodeJS) - Reference'
 )
 testEventEmitter(
-  require('../dist/event_emitter'),
-  'EventEmitter (TypeScript build)'
+  EventEmitterEsm,
+  'EventEmitter (TypeScript ESM build)'
 )
 testEventEmitter(
-  require('../dist/event_emitter'),
+  EventEmitterCjs,
+  'EventEmitter (TypeScript CJS build)'
+)
+testEventEmitter(
+  EventEmitterUmd,
   'EventEmitter (TypeScript UMD build)'
-)
-testEventEmitter(
-  require('../dist/index.min'),
-  'EventEmitter (Closure build)'
 )
 
 function testEventEmitter (EventEmitter, testName) {
   describe(testName, function () {
-    describe('#on', function () {
+    describe('#on, #off', function () {
       it('should fire once', function () {
         const EVT = 'someEvent'
         const emitter = new EventEmitter()
@@ -44,6 +49,20 @@ function testEventEmitter (EventEmitter, testName) {
         emitter.on(EVT, function () {
           count++
         })
+        emitter.emit(EVT)
+        assert.strictEqual(count, 2)
+      })
+      it('should fire twice (chaining)', function () {
+        const EVT = 'someEvent'
+        const emitter = new EventEmitter()
+        let count = 0
+        emitter
+          .on(EVT, function () {
+            count++
+          })
+          .on(EVT, function () {
+            count++
+          })
         emitter.emit(EVT)
         assert.strictEqual(count, 2)
       })

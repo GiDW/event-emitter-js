@@ -45,8 +45,8 @@
     "build-legacy-uglify": "uglifyjs legacy/index.js --compress --mangle -o legacy-dist/index.uglify.min.js",
     "build-legacy-closure": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file legacy-dist/index.closure.min.js legacy/index.js",
     "clean": "rm -rf dist/*; rm -rf legacy-dist/*",
-    "test": "mocha test/test.js",
-    "testm": "node --experimental-modules ./node_modules/.bin/mocha test/test.mjs"
+    "test-legacy": "mocha test/test.js",
+    "test": "node --experimental-modules ./node_modules/.bin/mocha test/test.mjs"
   },
   "standard": {
     "ignore": [

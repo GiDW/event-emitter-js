@@ -55,7 +55,7 @@
     "clean": "rm -rf dist/*; rm -rf legacy-dist/*",
     "test": "npm run test-legacy && npm run test-esm",
     "test-legacy": "mocha test/test.js",
-    "test-esm": "node --experimental-modules ./node_modules/.bin/mocha test-esm/test.mjs"
+    "test-esm": "node --experimental-modules ./node_modules/.bin/mocha test-esm/test.js"
   },
   "standard": {
     "ignore": [

@@ -284,6 +284,7 @@ $RECYCLE.BIN/
 build
 temp
 test
+test-esm
 
 .idea
 .vscode
@@ -316,6 +317,6 @@ src
 
 # Prevent publishing legacy artifacts
 
-lib
-lib/index.d.ts
-lib/index.js
+# lib
+# lib/index.d.ts
+# lib/index.js

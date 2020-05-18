@@ -4,11 +4,19 @@
   "description": "JavaScript EventEmitter",
   "author": "Gilles De Waele",
   "license": "MIT",
+  "type": "commonjs",
   "main": "lib/event_emitter.cjs.js",
   "browser": "umd/event_emitter.umd.js",
   "unpkg": "umd/event_emitter.umd.js",
   "module": "esm/event_emitter.esm.js",
   "types": "lib/event_emitter.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/event_emitter.cjs.js",
+      "default": "./esm/event_emitter.esm.js",
+      "browser": "./umd/event_emitter.umd.js"
+    }
+  },
   "keywords": [
     "javascript",
     "node",
@@ -45,8 +53,9 @@
     "build-legacy-uglify": "uglifyjs legacy/index.js --compress --mangle -o legacy-dist/index.uglify.min.js",
     "build-legacy-closure": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file legacy-dist/index.closure.min.js legacy/index.js",
     "clean": "rm -rf dist/*; rm -rf legacy-dist/*",
+    "test": "npm run test-legacy && npm run test-esm",
     "test-legacy": "mocha test/test.js",
-    "test": "node --experimental-modules ./node_modules/.bin/mocha test/test.mjs"
+    "test-esm": "node --experimental-modules ./node_modules/.bin/mocha test-esm/test.mjs"
   },
   "standard": {
     "ignore": [

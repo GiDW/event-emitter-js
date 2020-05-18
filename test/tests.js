@@ -1,32 +1,10 @@
 /* eslint-env mocha */
 
-'use strict'
-
-import assert from 'assert'
-
-import events from 'events'
-import EventEmitterEsm from '../esm/event_emitter.mjs'
-import EventEmitterCjs from '../lib/event_emitter.cjs.js'
-import EventEmitterUmd from '../dist/event_emitter.umd.js'
-
-testEventEmitter(
-  events,
-  'Events (NodeJS) - Reference'
-)
-testEventEmitter(
-  EventEmitterEsm,
-  'EventEmitter (TypeScript ESM build)'
-)
-testEventEmitter(
-  EventEmitterCjs,
-  'EventEmitter (TypeScript CJS build)'
-)
-testEventEmitter(
-  EventEmitterUmd,
-  'EventEmitter (TypeScript UMD build)'
-)
-
-function testEventEmitter (EventEmitter, testName) {
+module.exports = function testEventEmitter (
+  assert,
+  EventEmitter,
+  testName
+) {
   describe(testName, function () {
     describe('#on, #off', function () {
       it('should fire once', function () {

@@ -8,7 +8,7 @@ var nodeVersionMaj = parseInt(nodeVersion.split('.')[0], 10)
 var child
 
 if (nodeVersionMaj < 12) {
-  child = shell.exec('npm run test-legacy')
+  child = shell.exec('npm run test-legacy -- --color')
 } else {
   child = shell.exec('npm run test-esm')
 }

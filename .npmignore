@@ -284,6 +284,7 @@ $RECYCLE.BIN/
 build
 temp
 test
+test-esm
 
 .idea
 .vscode
@@ -306,8 +307,16 @@ rollup.config.js
 
 dist/index.uglify.js
 
+src
+
 # Prevent publishing typescript artifacts
 
-dist/event_emitter.js
-dist/event_emitter.d.ts
-src/event_emitter.ts
+# dist/event_emitter.js
+# dist/event_emitter.d.ts
+# src/event_emitter.ts
+
+# Prevent publishing legacy artifacts
+
+# lib
+# lib/index.d.ts
+# lib/index.js

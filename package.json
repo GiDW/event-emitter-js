@@ -4,9 +4,19 @@
   "description": "JavaScript EventEmitter",
   "author": "Gilles De Waele",
   "license": "MIT",
-  "main": "dist/event_emitter.js",
-  "browser": "dist/event_emitter.js",
-  "types": "dist/event_emitter.d.ts",
+  "type": "commonjs",
+  "main": "./lib/event_emitter.cjs.js",
+  "browser": "./umd/event_emitter.umd.js",
+  "unpkg": "./umd/event_emitter.umd.js",
+  "module": "./esm/event_emitter.esm.js",
+  "types": "./lib/event_emitter.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/event_emitter.cjs.js",
+      "default": "./esm/event_emitter.esm.js",
+      "browser": "./umd/event_emitter.umd.js"
+    }
+  },
   "keywords": [
     "javascript",
     "node",
@@ -17,16 +27,18 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@rollup/plugin-typescript": "4.1.1",
-    "@typescript-eslint/eslint-plugin": "2.29.0",
-    "@typescript-eslint/parser": "2.29.0",
-    "google-closure-compiler": "20200406.0.0",
-    "mocha": "7.1.1",
-    "rollup": "2.7.2",
+    "@rollup/plugin-typescript": "4.1.2",
+    "@typescript-eslint/eslint-plugin": "3.0.0",
+    "@typescript-eslint/parser": "3.0.0",
+    "google-closure-compiler": "20200517.0.0",
+    "mocha": "7.2.0",
+    "rollup": "2.10.8",
+    "rollup-plugin-terser": "6.0.1",
     "rollup-plugin-uglify": "6.0.4",
-    "standard": "14.3.3",
-    "typescript": "3.8.3",
-    "uglify-js": "3.9.1"
+    "shelljs": "0.8.4",
+    "standard": "14.3.4",
+    "typescript": "3.9.3",
+    "uglify-js": "3.9.3"
   },
   "repository": "github:GiDW/event-emitter-js.git",
   "bugs": {
@@ -34,16 +46,25 @@
     "email": "de.waele.gilles@gmail.com"
   },
   "scripts": {
-    "lint": "standard src/**/*.{js,ts}",
+    "lint": "standard ./src/**/*.{js,cjs,mjs,ts} ./test/**/*.{js,cjs,mjs,ts} ./test-esm/**/*.{js,cjs,mjs,ts}",
+    "build": "npm run build-rollup && npm run build-types",
     "build-rollup": "rollup --config rollup.config.js",
-    "build-uglify": "uglifyjs src/index.js --compress --mangle -o dist/index.uglify.js",
-    "build-closure": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file dist/index.min.js src/index.js",
-    "clean": "rm -rf dist/*",
-    "test": "mocha test/test.js"
+    "build-types": "tsc --project tsconfig-typings.json",
+    "build-legacy": "npm run build-legacy-uglify && npm run build-legacy-closure",
+    "build-legacy-uglify": "uglifyjs legacy/index.js --compress --mangle -o legacy-dist/index.uglify.min.js",
+    "build-legacy-closure": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file legacy-dist/index.closure.min.js legacy/index.js",
+    "clean": "rm -rf dist/*; rm -rf legacy-dist/*",
+    "test": "node ./test/run-test.js",
+    "test-legacy": "mocha ./test/test.js",
+    "test-esm": "node ./test/run-esm-test.js"
   },
   "standard": {
     "ignore": [
       "dist/**/*",
+      "esm/**/*",
+      "lib/**/*",
+      "umd/**/*",
+      "legacy-dist/**/*",
       "**/*.d.ts"
     ],
     "parser": "@typescript-eslint/parser",

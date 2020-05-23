@@ -281,3 +281,4 @@ $RECYCLE.BIN/
 ## Project
 
 !dist
+!umd

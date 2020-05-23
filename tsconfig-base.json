@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src"
+  },
+  "files": [
+    "./src/event_emitter.ts"
+  ]
 }

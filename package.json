@@ -4,19 +4,6 @@
   "description": "JavaScript EventEmitter",
   "author": "Gilles De Waele",
   "license": "MIT",
-  "type": "commonjs",
-  "main": "./lib/event_emitter.cjs.js",
-  "browser": "./umd/event_emitter.umd.js",
-  "unpkg": "./umd/event_emitter.umd.js",
-  "module": "./esm/event_emitter.esm.js",
-  "types": "./lib/event_emitter.d.ts",
-  "exports": {
-    ".": {
-      "require": "./lib/event_emitter.cjs.js",
-      "default": "./esm/event_emitter.esm.js",
-      "browser": "./umd/event_emitter.umd.js"
-    }
-  },
   "keywords": [
     "javascript",
     "node",
@@ -25,20 +12,27 @@
     "event",
     "eventemitter"
   ],
+  "type": "module",
+  "main": "./umd/event_emitter.min.js",
+  "module": "./esm/event_emitter.min.js",
+  "types": "./types/event_emitter.d.ts",
+  "browser": "./umd/event_emitter.umd.js",
+  "unpkg": "./umd/event_emitter.umd.js",
+  "exports": {
+    ".": {
+      "require": "./umd/event_emitter.min.js",
+      "default": "./esm/event_emitter.min.js"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
-    "@rollup/plugin-typescript": "5.0.2",
-    "@typescript-eslint/eslint-plugin": "3.9.0",
-    "@typescript-eslint/parser": "3.9.0",
-    "google-closure-compiler": "20200719.0.0",
-    "mocha": "7.2.0",
-    "rollup": "2.26.2",
-    "rollup-plugin-terser": "7.0.0",
-    "rollup-plugin-uglify": "6.0.4",
-    "shelljs": "0.8.4",
-    "standard": "14.3.4",
-    "typescript": "3.9.7",
-    "uglify-js": "3.10.1"
+    "@gidw/eslint-config-standard": "^16.0.2",
+    "eslint": "^7.18.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
+    "terser": "^5.5.1"
   },
   "repository": "github:GiDW/event-emitter-js.git",
   "bugs": {
@@ -46,30 +40,10 @@
     "email": "de.waele.gilles@gmail.com"
   },
   "scripts": {
-    "lint": "standard ./src/**/*.{js,cjs,mjs,ts} ./test/**/*.{js,cjs,mjs,ts} ./test-esm/**/*.{js,cjs,mjs,ts}",
-    "build": "npm run build-rollup && npm run build-types",
-    "build-rollup": "rollup --config rollup.config.js",
-    "build-types": "tsc --project tsconfig-typings.json",
-    "build-legacy": "npm run build-legacy-uglify && npm run build-legacy-closure",
-    "build-legacy-uglify": "uglifyjs legacy/index.js --compress --mangle -o legacy-dist/index.uglify.min.js",
-    "build-legacy-closure": "google-closure-compiler --compilation_level ADVANCED --language_out ECMASCRIPT5_STRICT --formatting SINGLE_QUOTES --externs build/umd.extern.js --js_output_file legacy-dist/index.closure.min.js legacy/index.js",
-    "clean": "rm -rf dist/*; rm -rf legacy-dist/*",
-    "test": "node ./test/run-test.js",
-    "test-legacy": "mocha ./test/test.js",
-    "test-esm": "node ./test/run-esm-test.js"
-  },
-  "standard": {
-    "ignore": [
-      "dist/**/*",
-      "esm/**/*",
-      "lib/**/*",
-      "umd/**/*",
-      "legacy-dist/**/*",
-      "**/*.d.ts"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint/eslint-plugin"
-    ]
+    "lint": "eslint --no-error-on-unmatched-pattern umd/**/*.{js,ts} esm/**/*.{js,ts}",
+    "minify-umd": "terser umd/event_emitter.js -o umd/event_emitter.min.js --ecma 5 --compress --mangle --safari10",
+    "minify-esm": "terser esm/event_emitter.js -o esm/event_emitter.min.js --ecma 6 --compress --mangle --safari10 --module",
+    "minify": "npm run minify-umd && npm run minify-esm",
+    "test": "nyc mocha test/esm/test.js"
   }
 }

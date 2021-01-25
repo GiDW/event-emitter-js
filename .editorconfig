@@ -6,13 +6,13 @@ insert_final_newline = true
 indent_style = space
 indent_size = 4
 
-[*.{js,ts,cjs,mjs}]
+[*.{js,ts,cjs,mjs,jsx,tsx}]
 indent_size = 2
 
 [{m,M}akefile]
 indent_style = tab
 
-[*.{json,yml}]
+[*.{json,yml,yaml}]
 indent_size = 2
 
 [*.{css,scss}]

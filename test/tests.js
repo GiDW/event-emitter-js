@@ -1,4 +1,4 @@
-/* eslint-env mocha */
+/* eslint-env node, mocha */
 
 module.exports = function testEventEmitter (
   assert,
@@ -93,6 +93,21 @@ module.exports = function testEventEmitter (
         })
         emitter.emit(EVT)
         assert.strictEqual(listenerThis, emitter)
+      })
+      it('should not fire after removeallListeners', function () {
+        const EVT = 'someEvent'
+        const emitter = new EventEmitter()
+        let count = 0
+        emitter.on(EVT, function () {
+          count++
+        })
+        emitter.on(EVT, function () {
+          count++
+        })
+        emitter.removeAllListeners()
+        emitter.emit(EVT)
+        emitter.emit(EVT)
+        assert.strictEqual(count, 0)
       })
     })
 

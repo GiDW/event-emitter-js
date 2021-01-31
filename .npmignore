@@ -319,3 +319,6 @@ src
 test.html
 
 *.txt
+
+esm/event_emitter.js
+umd/event_emitter.js

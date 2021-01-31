@@ -40,7 +40,7 @@
     "email": "de.waele.gilles@gmail.com"
   },
   "scripts": {
-    "lint": "eslint --no-error-on-unmatched-pattern umd/**/*.{js,ts} esm/**/*.{js,ts}",
+    "lint": "eslint --no-error-on-unmatched-pattern umd/**/*.{js,ts,cjs,mjs} esm/**/*.{js,ts,cjs,mjs}",
     "minify-umd": "terser umd/event_emitter.js -o umd/event_emitter.min.js --ecma 5 --compress --mangle --safari10",
     "minify-esm": "terser esm/event_emitter.js -o esm/event_emitter.min.js --ecma 6 --compress --mangle --safari10 --module",
     "minify": "npm run minify-umd && npm run minify-esm",

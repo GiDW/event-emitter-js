@@ -9,7 +9,7 @@ Simplified EventEmitter
 
 ## Installation
 
-UMD
+UMD or ESM
 
 ## Usage
 

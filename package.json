@@ -16,8 +16,8 @@
   "main": "./umd/event_emitter.min.js",
   "module": "./esm/event_emitter.min.js",
   "types": "./types/event_emitter.d.ts",
-  "browser": "./umd/event_emitter.umd.js",
-  "unpkg": "./umd/event_emitter.umd.js",
+  "browser": "./umd/event_emitter.min.js",
+  "unpkg": "./umd/event_emitter.min.js",
   "exports": {
     ".": {
       "require": "./umd/event_emitter.min.js",

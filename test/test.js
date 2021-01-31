@@ -6,7 +6,9 @@ import assert from 'assert'
 
 import events from 'events'
 import EventEmitterEsm from '../esm/event_emitter.js'
+import EventEmitterEsmMin from '../esm/event_emitter.min.js'
 import EventEmitterUmd from '../umd/event_emitter.js'
+import EventEmitterUmdMin from '../umd/event_emitter.min.js'
 
 testEventEmitter(
   assert,
@@ -20,8 +22,18 @@ testEventEmitter(
 )
 testEventEmitter(
   assert,
+  EventEmitterEsmMin,
+  'EventEmitter (ESM build, minified)'
+)
+testEventEmitter(
+  assert,
   EventEmitterUmd,
   'EventEmitter (UMD build)'
+)
+testEventEmitter(
+  assert,
+  EventEmitterUmdMin,
+  'EventEmitter (UMD build, minified)'
 )
 
 function testEventEmitter (

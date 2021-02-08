@@ -1,6 +1,6 @@
 declare class EventEmitter {
   private _events: { [key: string]: ((...args: any) => void)[] }
-  emit(eventName: string): this
+  emit(eventName: string, ...args: any[]): this
   addListener(eventName: string, listener: (...args: any) => void): this
   removeListener(eventName: string, listener: (...args: any) => void): this
   on(eventName: string, listener: (...args: any) => void): this

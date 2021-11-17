@@ -1,6 +1,6 @@
 {
   "name": "@gidw/event-emitter-js",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "JavaScript EventEmitter",
   "author": "Gilles De Waele",
   "license": "MIT",

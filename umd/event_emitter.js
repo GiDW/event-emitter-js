@@ -66,6 +66,8 @@
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = EventEmitter
+    // To support TypeScript ES5 imports
+    module.exports.default = EventEmitter
   } else {
     // Browser globals (root is window)
     root.EventEmitter = EventEmitter

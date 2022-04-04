@@ -7,7 +7,10 @@ class EventEmitter {
     const listeners = this._events[eventName]
     if (listeners) {
       const length = listeners.length
-      for (let i = 0; i < length; i++) listeners[i].apply(this, args)
+      for (let i = 0; i < length; i++) {
+        const listener = listeners[i]
+        if (typeof listener === 'function') listener.apply(this, args)
+      }
     }
     return this
   }

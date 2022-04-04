@@ -5,12 +5,15 @@
   }
 
   EventEmitter.prototype.emit = function (eventName) {
-    var listeners, args, length, i
+    var listeners, args, length, i, listener
     listeners = this._events[eventName]
     if (listeners) {
       args = getArgs(arguments, 1)
       length = listeners.length
-      for (i = 0; i < length; i++) listeners[i].apply(this, args)
+      for (i = 0; i < length; i++) {
+        listener = listeners[i]
+        if (typeof listener === 'function') listener.apply(this, args)
+      }
     }
     return this
   }

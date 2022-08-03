@@ -1,65 +1,65 @@
 class EventEmitter {
-  constructor () {
-    this._events = {}
+  constructor() {
+    this._events = {};
   }
 
-  emit (eventName, ...args) {
-    const listeners = this._events[eventName]
+  emit(eventName, ...args) {
+    const listeners = this._events[eventName];
     if (listeners) {
-      const length = listeners.length
+      const length = listeners.length;
       for (let i = 0; i < length; i++) {
-        const listener = listeners[i]
-        if (typeof listener === 'function') listener.apply(this, args)
+        const listener = listeners[i];
+        if (typeof listener === "function") listener.apply(this, args);
       }
     }
-    return this
+    return this;
   }
 
-  addListener (eventName, listener) {
-    if (typeof listener === 'function') {
-      if (!this._events[eventName]) this._events[eventName] = []
-      this._events[eventName].push(listener)
+  addListener(eventName, listener) {
+    if (typeof listener === "function") {
+      if (!this._events[eventName]) this._events[eventName] = [];
+      this._events[eventName].push(listener);
     }
-    return this
+    return this;
   }
 
-  removeListener (eventName, listener) {
-    const listeners = this._events[eventName]
-    if (listeners && typeof listener === 'function') {
-      const idx = listeners.lastIndexOf(listener)
-      if (idx > -1) listeners.splice(idx, 1)
+  removeListener(eventName, listener) {
+    const listeners = this._events[eventName];
+    if (listeners && typeof listener === "function") {
+      const idx = listeners.lastIndexOf(listener);
+      if (idx > -1) listeners.splice(idx, 1);
     }
-    return this
+    return this;
   }
 
-  removeAllListeners () {
-    this._events = {}
-    return this
+  removeAllListeners() {
+    this._events = {};
+    return this;
   }
 
-  once (eventName, listener) {
-    if (typeof listener === 'function') {
+  once(eventName, listener) {
+    if (typeof listener === "function") {
       const state = {
         eventName: eventName,
         listener: listener,
-        wrappedListener: undefined
-      }
-      const onceWrapped = this._once.bind(this, state)
-      state.wrappedListener = onceWrapped
-      this.addListener(eventName, onceWrapped)
+        wrappedListener: undefined,
+      };
+      const onceWrapped = this._once.bind(this, state);
+      state.wrappedListener = onceWrapped;
+      this.addListener(eventName, onceWrapped);
     }
-    return this
+    return this;
   }
 
-  _once (state, ...args) {
+  _once(state, ...args) {
     if (state.wrappedListener) {
-      this.removeListener(state.eventName, state.wrappedListener)
-      state.listener.apply(this, args)
+      this.removeListener(state.eventName, state.wrappedListener);
+      state.listener.apply(this, args);
     }
   }
 }
 
-EventEmitter.prototype.on = EventEmitter.prototype.addListener
-EventEmitter.prototype.off = EventEmitter.prototype.removeListener
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
 
-export default EventEmitter
+export default EventEmitter;

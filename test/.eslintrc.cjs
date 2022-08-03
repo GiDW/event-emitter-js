@@ -2,9 +2,9 @@
 module.exports = {
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: 'module'
+    sourceType: "module",
   },
   env: {
-    mocha: true
-  }
-}
+    mocha: true,
+  },
+};

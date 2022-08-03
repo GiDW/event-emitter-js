@@ -28,9 +28,11 @@
   "devDependencies": {
     "@gidw/eslint-config-standard": "^1.1.1",
     "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "mocha": "^9.2.2",
     "nyc": "^15.1.0",
+    "prettier": "^2.7.1",
     "terser": "^5.14.2"
   },
   "repository": "github:GiDW/event-emitter-js.git",
@@ -39,7 +41,9 @@
     "email": "de.waele.gilles@gmail.com"
   },
   "scripts": {
-    "lint": "eslint --no-error-on-unmatched-pattern umd/**/*.{js,ts,cjs,mjs} esm/**/*.{js,ts,cjs,mjs}",
+    "lint": "eslint --ext .js,.cjs,.mjs,.jsx,.ts,.cts,.mts,.tsx .",
+    "lint-old": "eslint --no-error-on-unmatched-pattern umd/**/*.{js,ts,cjs,mjs} esm/**/*.{js,ts,cjs,mjs}",
+    "prettier": "prettier -w .",
     "minify-umd": "terser umd/event_emitter.js -o umd/event_emitter.min.js --ecma 5 --compress --mangle --safari10",
     "minify-esm": "terser esm/event_emitter.js -o esm/event_emitter.min.js --ecma 6 --compress --mangle --safari10 --module",
     "minify": "npm run minify-umd && npm run minify-esm",

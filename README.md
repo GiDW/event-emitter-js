@@ -14,11 +14,11 @@ UMD or ESM
 ## Usage
 
 ```js
-var emitter = new EventEmitter()
+var emitter = new EventEmitter();
 
-emitter.on('event', function (data) {
-    console.log('on event', data)
-})
+emitter.on("event", function (data) {
+    console.log("on event", data);
+});
 
-emitter.emit('event', 'data')
+emitter.emit("event", "data");
 ```

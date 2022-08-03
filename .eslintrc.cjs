@@ -1,8 +1,5 @@
 /* eslint-env node */
 module.exports = {
-  extends: '@gidw/eslint-config-standard',
-  ignorePatterns: [
-    'node_modules/',
-    '**/*.min.js'
-  ]
-}
+  extends: ["@gidw/eslint-config-standard", "prettier"],
+  ignorePatterns: ["node_modules/", "**/*.min.js", "types/"],
+};

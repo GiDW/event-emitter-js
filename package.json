@@ -42,7 +42,6 @@
   },
   "scripts": {
     "lint": "eslint --ext .js,.cjs,.mjs,.jsx,.ts,.cts,.mts,.tsx .",
-    "lint-old": "eslint --no-error-on-unmatched-pattern umd/**/*.{js,ts,cjs,mjs} esm/**/*.{js,ts,cjs,mjs}",
     "prettier": "prettier -w .",
     "minify-umd": "terser umd/event_emitter.js -o umd/event_emitter.min.js --ecma 5 --compress --mangle --safari10",
     "minify-esm": "terser esm/event_emitter.js -o esm/event_emitter.min.js --ecma 6 --compress --mangle --safari10 --module",

@@ -5,6 +5,6 @@ module.exports = {
     sourceType: "module",
   },
   env: {
-    mocha: true,
+    jest: true,
   },
 };
